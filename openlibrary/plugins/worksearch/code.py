@@ -13,12 +13,12 @@ from unicodedata import normalize
 
 import httpx
 import web
+from requests import Response
+
 from infogami import config
 from infogami.infobase.client import storify
 from infogami.utils import delegate
 from infogami.utils.view import public, render, render_template, safeint
-from requests import Response
-
 from openlibrary.core import cache
 from openlibrary.core.env import get_ol_env
 from openlibrary.core.lending import add_availability, add_availability_async
@@ -1033,8 +1033,8 @@ async def _process_solr_search_response(response: SearchResponse, fields: str) -
     to both sync and async versions.
     """
     if response.raw_resp is None:
-        return {'error': 'Something went wrong'}
-    processed_response = response.raw_resp['response']
+        return {"error": "Something went wrong"}
+    processed_response = response.raw_resp["response"]
 
     if response.highlighting is not None:
         processed_response["highlighting"] = response.highlighting
